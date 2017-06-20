@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 ###################################################################################################
-# SKIMMR for the web:
+# SKIMR for the web:
 #
 # -Use selenium webdriver to scrape html from input url
 # -Apply cleaning function to html
@@ -16,7 +16,7 @@
 
 # WEB
 from flask import render_template, request, redirect, url_for
-from skimmr import app
+from skimr import app
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup

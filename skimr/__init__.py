@@ -1,3 +1,3 @@
 from flask import Flask
 app = Flask(__name__)
-from skimmr import skimmr
+from skimr import skimr
