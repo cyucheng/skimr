@@ -37,6 +37,8 @@ sys.path.insert(0, 'readability')   # readability from https://github.com/mmautn
 from readability import Readability
 import nltk
 nltk.download('punkt')
+nltk.download('words')
+nltk.download('stopwords')
 import nltk.data
 sent_tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 from nltk.tokenize import RegexpTokenizer
