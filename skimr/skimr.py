@@ -47,7 +47,15 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 p_stemmer = PorterStemmer()
 
+# ML
 from patsy import dmatrices
+import sklearn
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.pipeline import make_pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
+from sklearn.metrics.pairwise import cosine_similarity
 
 from stop_words import get_stop_words
 stop_en     = get_stop_words('en')
