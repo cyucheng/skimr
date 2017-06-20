@@ -46,15 +46,15 @@ p_stemmer = PorterStemmer()
 from patsy import dmatrices
 
 from stop_words import get_stop_words
-stop_en = get_stop_words('en')
-en_words = set(nltk.corpus.words.words())
-stopw_en = stopwords.words('english')
-all_stopw = set(stopw_en) | set(stop_en)
+stop_en     = get_stop_words('en')
+en_words    = set(nltk.corpus.words.words())
+stopw_en    = stopwords.words('english')
+all_stopw   = set(stopw_en) | set(stop_en)
 
-pipe = pd.read_pickle('/Users/clarencecheng/Dropbox/~Insight/Highlight4Me/model_len_lda_wpos_wpos_readmets')
-ldamodel = pickle.load(open('/Users/clarencecheng/Dropbox/~Insight/Highlight4Me/lda_10topic20pass_new2b','rb'))
-commonwords_2 = pickle.load(open('/Users/clarencecheng/Dropbox/~Insight/Highlight4Me/commonwords2','rb'))
-dictionary = pickle.load(open('/Users/clarencecheng/Dropbox/~Insight/Highlight4Me/lda_dictionary_new2','rb'))
+pipe            = pd.read_pickle('pkl/model_logreg.pkl')
+ldamodel        = pickle.load(open('pkl/lda_model.pkl','rb'))
+commonwords_2   = pickle.load(open('pkl/commonwords.pkl','rb'))
+dictionary      = pickle.load(open('pkl/lda_dictionary.pkl','rb'))
 
 #############################################################################################################################
 def webscrape(inputurl):
@@ -70,9 +70,9 @@ def webscrape(inputurl):
 def cleanfulltext(scrapedhtml):
 
     lines = []
-    soup = BeautifulSoup(scrapedhtml,'lxml')                     
-    txt0 = soup.find('div',attrs={'data-source':'post_page'})    
-    txt1 = txt0.find_all(class_='graf')
+    soup  = BeautifulSoup(scrapedhtml,'lxml')                     
+    txt0  = soup.find('div',attrs={'data-source':'post_page'})    
+    txt1  = txt0.find_all(class_='graf')
 
     for line in txt1:
         txt2 = re.sub('<[^>]+>', '', str(line) )
@@ -335,10 +335,6 @@ def markup(predicted, decfxn, data, scrapedhtml):
 @app.route('/index')
 def index():
     return render_template("index.html")
-
-@app.route('/input')
-def text_input():
-    return render_template("input.html")
 
 @app.route('/output')
 def output():
