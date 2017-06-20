@@ -33,7 +33,7 @@ import string
 from string import whitespace, punctuation
 
 # NLP
-sys.path.insert(0, '/Users/clarencecheng/src/readability') # or /path/to/readability
+sys.path.insert(0, 'readability')   # readability from https://github.com/mmautner/readability
 from readability import Readability
 import nltk.data
 sent_tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
