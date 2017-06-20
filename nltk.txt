@@ -1,0 +1,3 @@
+punkt
+words
+stopwords
