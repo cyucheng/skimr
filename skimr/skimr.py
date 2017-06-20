@@ -35,6 +35,8 @@ from string import whitespace, punctuation
 # NLP
 sys.path.insert(0, 'readability')   # readability from https://github.com/mmautner/readability
 from readability import Readability
+import nltk
+nltk.download('punkt')
 import nltk.data
 sent_tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 from nltk.tokenize import RegexpTokenizer
