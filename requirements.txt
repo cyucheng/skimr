@@ -1,6 +1,7 @@
 beautifulsoup4==4.6.0
 Cython==0.25.2
 Flask==0.12.2
+gensim==2.1.0
 gunicorn==19.7.1
 nltk==3.2.4
 numpy==1.12.1
