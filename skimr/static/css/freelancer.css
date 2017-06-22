@@ -80,6 +80,12 @@ header .container {
   padding-bottom: 50px;
 }
 header img {
+  padding: 0;
+  border: none;
+  border-top: solid 5px;
+  text-align: center;
+  max-width: 250px;
+  margin: 25px auto 30px;
   display: block;
   margin: 0 auto 20px;
 }
