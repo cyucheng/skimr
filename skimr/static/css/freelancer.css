@@ -20,7 +20,9 @@ a:active,
 a.active {
   color: #18BC9C;
 }
-h1,
+h1 {
+  text-transform: lowercase;
+}
 h2,
 h3,
 h4,
