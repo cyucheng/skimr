@@ -20,7 +20,11 @@ a:active,
 a.active {
   color: #18BC9C;
 }
-h1,
+h1 {
+  margin: 0;
+  padding: 0;
+  text-transform: lowercase;
+}
 h2,
 h3,
 h4,
@@ -76,13 +80,19 @@ header .container {
   padding-bottom: 50px;
 }
 header img {
+  padding: 0;
+  border: none;
+  border-top: solid 5px;
+  text-align: center;
+  max-width: 250px;
+  margin: 25px auto 30px;
   display: block;
   margin: 0 auto 20px;
 }
 header .intro-text .name {
   display: block;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-transform: uppercase;
+  text-transform: lowercase;
   font-weight: 700;
   font-size: 2em;
 }
