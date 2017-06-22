@@ -29,42 +29,62 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
 </head>
 
-<body id="page-top" class="index" style="background-color:#18BC9C">
+<body id="page-top" class="index">
 
     <!-- Header -->
     <header>
-        <div class="header" ><!-- id="header" tabindex="-1"> -->
+        <div class="container" id="maincontent" tabindex="-1">
             <div class="row">
                 <div class="col-lg-12">
+                    <!-- <img class="img-responsive" src="{{url_for('static', filename='img/Logo4only.png')}}" alt=""/> -->
                     <div class="intro-text">
-                        <br>
-                        <br>
                         <h1 class="name">skimr</h1>
-                        <img class="img-responsive" width="700" height="160" src="{{url_for('static', filename='img/Logo5.png')}}" alt=""/>
-                        <br>
-                        <span class="skills">Streamlining online reading with machine-learned highlights</span>
+                        <hr class="star-light">
+                        <span class="skills">Faster reading with NLP analysis of crowd-sourced article highlights</span>
                     </div>
                 </div>
             </div>
         </div>
+      <form  action="/output" method="GET">
+        <div class="col-lg-10">
+          <div class="input-group">
+            <label for="inputtext">Input URL:</label>
+            <input type="text" class="form-control" id="inputtext" name="inputtext" placeholder="Input url...">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-default" >Skim!</button>
+            </span>
 
-        <br>
-        <br>
+          </div>
+        </div>
 
-        <form  action="/output" method="GET">
-                <div class="input-group input-group-lg">
-                    <!-- <label for="inputtext">Input URL:</label> -->
-                    <input type="text" class="form-control" id="inputtext" name="inputtext" placeholder="Input url..." size="100"><!--  style="height:20px"> -->
-                    <span class="input-group-addon" id="basic-addon1">
-                        <button type="submit" class="btn btn-default" >Skim!</button>
-                    </span>
+      </form>
+<!-- 
+    <div class="starter-template">
+        <h2>Enter article URL!</h2>
+    </div>
+ -->
+    <div class = "container">
 
-                </div>
-            </div>
-        </form>
+
+
+<!--       <form  action="/output" method="GET">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <label for="inputtext">Input text:</label>
+            <input type="text" class="form-control" id="inputtext" name="inputtext" placeholder="Input text...">
+
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-default" >Highlight4Me!</button>
+            </span>
+
+          </div>
+        </div>
+      </form> -->
+
+
+    </div>
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>

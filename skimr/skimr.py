@@ -313,6 +313,8 @@ def markup(predicted, decfxn, data, scrapedhtml):
     decision = list(decfxn)
     n = 0
     for f in data['sentences']:
+        # time.sleep(10)
+        # newsoup = soup
         # print(n)
         # print(predict[n])
         # print(f)
