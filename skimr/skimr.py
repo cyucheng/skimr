@@ -351,6 +351,8 @@ def index():
 @app.route('/output')
 def output():
     inputtext = request.args.get('inputtext')
+    if not inputtext.startswith('http'):
+        return render_template("error.html")
     scrapedhtml = webscrape(inputtext)
     cleanedtext = cleanfulltext(scrapedhtml)
     data = calc_params(cleanedtext)
