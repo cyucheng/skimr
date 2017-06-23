@@ -30,7 +30,7 @@ h5,
 h6 {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: lowercase;
-  font-weight: 700;
+  font-weight: 400;
 }
 hr.star-light,
 hr.star-primary {
@@ -85,7 +85,7 @@ header .intro-text .name {
   display: block;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: lowercase;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 2em;
 }
 header .intro-text .skills {
