@@ -291,46 +291,17 @@ def markup(predicted, decfxn, data, scrapedhtml):
 
     soup = BeautifulSoup(scrapedhtml,'lxml')
 
-    # USE CONFIDENCE SCORES TO ONLY HIGHLIGHT 30% OF SENTENCES?
-    # predict = list(predicted)
-    # num_sents = len(predict)
-    # highlight_thres = 0.3
-    # num_highlight = int(math.floor(0.3*num_sents))
-    # decfxn = pipe.decision_function(X)
-    # cumul = pd.DataFrame({'confidencescore':decfxn, 'highlightornot':predict})
-    # cumul_sort = cumul.sort_values('confidencescore', ascending=False)
-    # predict_thres = []
-    # for i in cumul_sort['highlightornot']:
-    #     if total <= num_highlight:
-    #         total = total + i
-    #         predict_thres.append(i)
-    #     elif total > num_highlight:
-    #         predict_thres.append(0)
-
-
     predict = list(predicted)
     tmpsoup = str(soup)
     decision = list(decfxn)
     n = 0
     for f in data['sentences']:
-        # time.sleep(10)
-        # newsoup = soup
-        # print(n)
-        # print(predict[n])
-        # print(f)
-        # print(decision[n])
-        # if n <= 5:
-        #     print(soup)
         if predict[n] == 1:
             if decision[n] >= 0.1:
                 # print(str(f)+' is highlighted')
                 newf = '<span style="background-color: #4EE2EC">'+f+'</span>'
                 # print('newf is: ' + newf)
-                # if n <= 5:
-                #     print(soup)
-                # print(soup)
                 tmpsoup = tmpsoup.replace( f, newf, 1)
-                # print(tmpsoup)
 
         n+=1
 

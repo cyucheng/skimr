@@ -41,36 +41,39 @@
                     <!-- <img class="img-responsive" width="700px" height="160px" src="{{url_for('static', filename='img/Logo5a.png')}}" alt=""/> -->
                     <div class="intro-text">
                         <h1 class="name">skimr</h1>
-                        <!-- <hr class="star-light"> -->
-                        <img class="img-responsive" width="720px" height="120px" src="{{url_for('static', filename='img/Logo7.png')}}" alt=""/>
-                        <span class="skills">Streamlining online reading with machine-learned highlights</span>
+                        <img class="img-responsive" width="750px" height="136px" src="{{url_for('static', filename='img/Logo8c2.png')}}" alt=""/>
+                        <!-- <span class="skills">Streamlining online reading with machine-learned highlights</span> -->
                     </div>
                 </div>
             </div>
         </div>
-      <form  action="/output" method="GET">
-        <div class="col-lg-10">
-          <div class="input-group">
-            <label for="inputtext">Input URL:</label>
-            <input type="text" class="form-control" id="inputtext" name="inputtext" placeholder="Ex. https://medium.com/..." size="100">
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-default" >Skim!</button>
-            </span>
-            <br>
-            <label>Example: https://medium.com/art-of-practicality/5-zen-principles-to-live-by-da680870f838</label>
+        <form  action="/output" method="GET">
+            <div class="col-lg-10">
+                <div class="input-group">
+                    <label for="inputtext">Input URL from Medium.com:</label>
+                    <br>
+                    <input type="text" class="form-control" id="inputtext" name="inputtext" placeholder="Ex. https://medium.com/..." size="100">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-default" >Skim!</button>
+                    </span>
+                    <br>
+                    <label>Example: https://medium.com/art-of-practicality/5-zen-principles-to-live-by-da680870f838</label>
+    
+                </div>
+            </div>
 
-          </div>
-        </div>
-
-      </form>
+        </form>
 
     <div class="col-lg-10">
-        <p>Please ensure your URL is complete (starts with 'http')</p>
+        <p style="color:purple">Please ensure your URL is complete (starts with 'http')</p>
+    </div>
 
     <div class = "container">
+        <br>
+        <br>
+        <br>
 
-    <iframe src="https://docs.google.com/presentation/d/1UtmQgIopb9BSEu3QvPIi_2M5eXPZ3gavTlrKoZ7Wcow/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-
+        <iframe src="https://docs.google.com/presentation/d/1UtmQgIopb9BSEu3QvPIi_2M5eXPZ3gavTlrKoZ7Wcow/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
     </div>
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -78,6 +81,38 @@
 
 
     </header>
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class = "container">
+            <div align="center">
+                <table cellpadding="0" width="400" cellspacing="0">
+                    <tr>
+                        <td>
+                            <a href="mailto:cyucheng@alumni.stanford.edu">
+                                <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/gmail-128-2.png')}}" alt=""/>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="https://www.linkedin.com/in/clarenceyucheng/">
+                                <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/GitHub-Mark-120px-plus.png')}}" alt=""/>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="https://github.com/cyucheng">
+                                <img class="img-responsive" width="44px" height="40px" src="{{url_for('static', filename='img/In-Black-121px-TM.png')}}" alt=""/>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div align="center">
+                <p class="copyright text-muted">Copyright &copy; Clarence Cheng, 2017</p>
+            </div>
+        </div>
+    </footer>
 
 
     <!-- jQuery -->

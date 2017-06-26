@@ -79,7 +79,7 @@ header .container {
 }
 header img {
   display: block;
-  margin: 0 auto 20px;
+  margin: 0 auto 10px;
 }
 header .intro-text .name {
   display: block;
@@ -94,8 +94,8 @@ header .intro-text .skills {
 }
 @media (min-width: 768px) {
   header .container {
-    padding-top: 200px;
-    padding-bottom: 100px;
+    padding-top: 90px;
+    padding-bottom: 70px;
   }
   header .intro-text .name {
     font-size: 4.75em;
@@ -292,6 +292,7 @@ form .row:first-child .floating-label-form-group {
   border-top: 1px solid #eeeeee;
 }
 footer {
+  background: #18BC9C;
   color: white;
 }
 footer h3 {
@@ -299,14 +300,14 @@ footer h3 {
 }
 footer .footer-above {
   padding-top: 50px;
-  background-color: #2C3E50;
+  background-color: #18BC9C;
 }
 footer .footer-col {
   margin-bottom: 50px;
 }
 footer .footer-below {
   padding: 25px 0;
-  background-color: #233140;
+  background-color: #18BC9C;
 }
 .btn-outline {
   color: white;
