@@ -9,7 +9,6 @@ body {
 }
 p {
   font-size: 20px;
-  max-width: 100px;
 }
 p.small {
   font-size: 16px;
@@ -21,7 +20,9 @@ a:active,
 a.active {
   color: #18BC9C;
 }
-h1,
+h1 {
+  text-transform: lowercase;
+}
 h2,
 h3,
 h4,
@@ -29,7 +30,7 @@ h5,
 h6 {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 700;
 }
 hr.star-light,
 hr.star-primary {
@@ -78,20 +79,13 @@ header .container {
 }
 header img {
   display: block;
-  margin: 0 auto 10px;
+  margin: 0 auto 20px;
 }
 header .intro-text .name {
   display: block;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-transform: lowercase;
-  font-weight: 400;
-  font-size: 2em;
-}
-header .other-text .name {
-  display: block;
-  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 2em;
 }
 header .intro-text .skills {
@@ -100,8 +94,8 @@ header .intro-text .skills {
 }
 @media (min-width: 768px) {
   header .container {
-    padding-top: 90px;
-    padding-bottom: 70px;
+    padding-top: 100px;
+    padding-bottom: 100px;
   }
   header .intro-text .name {
     font-size: 4.75em;
@@ -163,7 +157,7 @@ header .intro-text .skills {
 }
 @media (min-width: 768px) {
   .navbar-custom {
-    padding: 25px 0;
+    padding: 10px 0;
     -webkit-transition: padding 0.3s;
     -moz-transition: padding 0.3s;
     transition: padding 0.3s;
@@ -182,13 +176,11 @@ header .intro-text .skills {
   }
 }
 section {
-  text-align: center;
   background: #18BC9C;
-  color:white;
+  color: white;
   padding: 100px 0;
 }
 section h2 {
-  text-transform: uppercase;
   margin: 0;
   font-size: 3em;
 }
@@ -198,8 +190,6 @@ section.success {
 }
 @media (max-width: 767px) {
   section {
-    text-align: center;
-    background: #18BC9C;
     padding: 75px 0;
   }
   section.first {
@@ -300,11 +290,27 @@ section.success {
 .floating-label-form-group-with-focus label {
   color: #18BC9C;
 }
+/*###############################################################*/
+input::-webkit-input-placeholder {
+color: #cccccc !important;
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color: #cccccc !important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: #cccccc !important;  
+}
+ 
+input:-ms-input-placeholder {  
+color: #cccccc !important;  
+}
+/*###############################################################*/
 form .row:first-child .floating-label-form-group {
   border-top: 1px solid #eeeeee;
 }
 footer {
-  background: #18BC9C;
   color: white;
 }
 footer h3 {
@@ -319,7 +325,7 @@ footer .footer-col {
 }
 footer .footer-below {
   padding: 25px 0;
-  background-color: #18BC9C;
+  background-color: #2C3E50;
 }
 .btn-outline {
   color: white;
