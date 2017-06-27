@@ -299,9 +299,9 @@ def markup(predicted, decfxn, data, scrapedhtml):
         if predict[n] == 1:
             if decision[n] >= 0.1:
                 # print(str(f)+' is highlighted')
-                newf = '<span style="background-color: #4EE2EC">'+f+'</span>'
+                newf = '<span style="background-color: #ffff00">'+f+'</span>'
                 # print('newf is: ' + newf)
-                tmpsoup = tmpsoup.replace( f, newf, 1)
+                tmpsoup = tmpsoup.replace( f, newf)
 
         n+=1
 

@@ -9,6 +9,7 @@ body {
 }
 p {
   font-size: 20px;
+  max-width: 100px;
 }
 p.small {
   font-size: 16px;
@@ -20,16 +21,14 @@ a:active,
 a.active {
   color: #18BC9C;
 }
-h1 {
-  text-transform: lowercase;
-}
+h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-transform: lowercase;
+  text-transform: uppercase;
   font-weight: 400;
 }
 hr.star-light,
@@ -85,6 +84,13 @@ header .intro-text .name {
   display: block;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: lowercase;
+  font-weight: 400;
+  font-size: 2em;
+}
+header .other-text .name {
+  display: block;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
   font-weight: 400;
   font-size: 2em;
 }
@@ -176,9 +182,13 @@ header .intro-text .skills {
   }
 }
 section {
+  text-align: center;
+  background: #18BC9C;
+  color:white;
   padding: 100px 0;
 }
 section h2 {
+  text-transform: uppercase;
   margin: 0;
   font-size: 3em;
 }
@@ -188,6 +198,8 @@ section.success {
 }
 @media (max-width: 767px) {
   section {
+    text-align: center;
+    background: #18BC9C;
     padding: 75px 0;
   }
   section.first {

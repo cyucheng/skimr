@@ -64,48 +64,62 @@
 
         </form>
 
-    <div class = "container">
-        <br>
-        <br>
-        <br>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../static/js/bootstrap.min.js"></script>
 
-        <iframe src="https://docs.google.com/presentation/d/1UtmQgIopb9BSEu3QvPIi_2M5eXPZ3gavTlrKoZ7Wcow/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
+        <div class="container" bgcolor="#18BC9C">
+            <div class="row">
+                <div align="center">
+                    <div class="col-lg-12 text-center">
+                        <div class="other-text">
+                            <h1 class="name">About</h1>
+                        </div>
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <p><span style="font-weight:bold">skimr</span> is a web application for streamlining reading of online articles. It applies a machine-learning model, based on natural language processing of user highlights from <a href="https://medium.com/" style="color:white">Medium.com</a>, to predict which sentences will be highlighted in an article, then highlights those sentences <i>in situ</i>.</p>
+                            <p>Please see the slides below for more details.</p>
+                        </div>
+                        <br>
+                        <iframe src="https://docs.google.com/presentation/d/1UtmQgIopb9BSEu3QvPIi_2M5eXPZ3gavTlrKoZ7Wcow/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </header>
 
 
-
     <!-- Footer -->
-    <footer>
-        <div class = "container">
-            <div align="center">
-                <table cellpadding="0" width="400" cellspacing="0">
-                    <tr>
-                        <td>
-                            <a href="mailto:cyucheng@alumni.stanford.edu">
-                                <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/gmail-128-2.png')}}" alt=""/>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="https://www.linkedin.com/in/clarenceyucheng/">
-                                <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/GitHub-Mark-120px-plus.png')}}" alt=""/>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="https://github.com/cyucheng">
-                                <img class="img-responsive" width="44px" height="40px" src="{{url_for('static', filename='img/In-Black-121px-TM.png')}}" alt=""/>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div align="center">
-                <p class="copyright text-muted">Copyright &copy; Clarence Cheng, 2017</p>
+    <footer class = "text-center">
+        <div class = "footer-above">
+            <div class = "container">
+                <div class = "row">
+                    <!-- <div > -->
+                        <table cellpadding="0" width="150" cellspacing="0" align="center">
+                            <tr>
+                                <td>
+                                    <a href="mailto:cyucheng@alumni.stanford.edu">
+                                        <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/gmail-128-2.png')}}" alt=""/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="https://github.com/cyucheng">
+                                        <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/GitHub-Mark-120px-plus.png')}}" alt=""/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="https://www.linkedin.com/in/clarenceyucheng/">
+                                        <img class="img-responsive" width="44px" height="40px" src="{{url_for('static', filename='img/In-Black-121px-TM.png')}}" alt=""/>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    <!-- </div> -->
+                </div>
+                <div align="center">
+                    <p class="copyright text-muted">Copyright &copy; Clarence Cheng, 2017</p>
+                    <br>
+                </div>
             </div>
         </div>
     </footer>
