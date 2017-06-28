@@ -1,3 +1,12 @@
+*.psd
+.DS_Store
+skimr/.DS_Store
+skimr/vendor/
+skimr/mail/
+skimr/css/
+skimr/js/
+*.tmp
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
