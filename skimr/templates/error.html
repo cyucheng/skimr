@@ -12,13 +12,13 @@
     <title>skimr - streamline online reading</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="../static/css/freelancer.min.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/freelancer.min.css')}}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{{url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -32,105 +32,171 @@
 </head>
 
 <body id="page-top" class="index">
+<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <!-- <a class="navbar-brand" href="#page-top">skimr</a> -->
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="page-scroll">
+                        <a href="#page-top">skimr</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
 
     <!-- Header -->
-    <header>
+    <header id="page-top">
         <div class="container" id="maincontent" tabindex="-1">
             <div class="row">
                 <div class="col-lg-12">
-                    <!-- <img class="img-responsive" width="700px" height="160px" src="{{url_for('static', filename='img/Logo5a.png')}}" alt=""/> -->
                     <div class="intro-text">
                         <h1 class="name">skimr</h1>
-                        <img class="img-responsive" width="770px" height="140px" src="{{url_for('static', filename='img/Logo8c2.png')}}" alt=""/>
-                        <!-- <span class="skills">Streamlining online reading with machine-learned highlights</span> -->
+                        <img class="img-responsive" width="770px" height="140px" src="{{url_for('static', filename='img/Logo8c2.png')}}">       <!-- "{{url_for('static', filename='img/Logo8c2.png')}}" alt=""/> -->
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                    <!-- <form name="sentMessage" id="contactForm" novalidate> -->
+                    <form  action="/output" method="GET">
+                        <div class="row">
+                            <p> Input URL from Medium.com: </p>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <br>
+                                <!-- <label for="inputtext">Input URL from Medium.com:</label> -->
+                                <input type="text" class="form-control" id="inputtext" name="inputtext" placeholder="Ex. https://medium.com/..." style="color:white" required data-validation-required-message="Please enter a complete URL from Medium.com">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <p style="font-size:15px"> Example: https://medium.com/art-of-practicality/5-zen-principles-to-live-by-da680870f838 </p>
+                        <!-- <br> -->
+                        <div id="success"></div>
+                        <div class="row">
+                            <p style="color:purple">Please ensure your URL is complete (starts with 'http')</p>
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-success btn-lg">Skim!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <br>
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <p><span style="font-weight:bold">skimr</span> is a web application for streamlining reading of online articles. It applies a machine-learning model, based on natural language processing of user highlights from <a href="https://medium.com/" style="color:white">Medium.com</a>, to predict which sentences will be highlighted in an article, then highlights those sentences <i>in situ</i>.</p>
+                        <p>Please see the slides below for more details.</p>
+                    </div>
+                    <br>
+                    <iframe src="https://docs.google.com/presentation/d/1UtmQgIopb9BSEu3QvPIi_2M5eXPZ3gavTlrKoZ7Wcow/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                    </div>
+                    <div class="footer-col col-md-4" align="center">
+                        <ul class="list-inline">
+                            <li>
+                                <a href="mailto:cyucheng@alumni.stanford.edu"> 
+                                    <span class="sr-only">Mail</span>
+                                    <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/gmail-128-2.png')}}" alt=""/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/cyucheng">
+                                    <span class="sr-only">GitHub</span>
+                                    <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/GitHub-Mark-120px-plus.png')}}" alt=""/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/clarenceyucheng/">
+                                    <span class="sr-only">LinkedIn</span>
+                                    <img class="img-responsive" width="44px" height="40px" src="{{url_for('static', filename='img/In-Black-121px-TM.png')}}" alt=""/>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <form  action="/output" method="GET">
-            <div class="col-lg-10">
-                <div class="input-group">
-                    <label for="inputtext">Input URL from Medium.com:</label>
-                    <br>
-                    <input type="text" class="form-control" id="inputtext" name="inputtext" placeholder="Ex. https://medium.com/..." size="100">
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-default" >Skim!</button>
-                    </span>
-                    <br>
-                    <label>Example: https://medium.com/art-of-practicality/5-zen-principles-to-live-by-da680870f838</label>
-    
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        skimr Copyright &copy; Clarence Cheng, 2017
+                    </div>
                 </div>
-            </div>
-
-        </form>
-
-    <div class="col-lg-10">
-        <p style="color:purple">Please ensure your URL is complete (starts with 'http')</p>
-    </div>
-
-    <div class = "container">
-        <br>
-        <br>
-        <br>
-
-        <iframe src="https://docs.google.com/presentation/d/1UtmQgIopb9BSEu3QvPIi_2M5eXPZ3gavTlrKoZ7Wcow/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-
-
-    </header>
-
-
-
-    <!-- Footer -->
-    <footer>
-        <div class = "container">
-            <div align="center">
-                <table cellpadding="0" width="400" cellspacing="0">
-                    <tr>
-                        <td>
-                            <a href="mailto:cyucheng@alumni.stanford.edu">
-                                <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/gmail-128-2.png')}}" alt=""/>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="https://www.linkedin.com/in/clarenceyucheng/">
-                                <img class="img-responsive" width="40px" height="40px" src="{{url_for('static', filename='img/GitHub-Mark-120px-plus.png')}}" alt=""/>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="https://github.com/cyucheng">
-                                <img class="img-responsive" width="44px" height="40px" src="{{url_for('static', filename='img/In-Black-121px-TM.png')}}" alt=""/>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div align="center">
-                <p class="copyright text-muted">Copyright &copy; Clarence Cheng, 2017</p>
             </div>
         </div>
     </footer>
 
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
 
     <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="../static/js/jqBootstrapValidation.js"></script>
-    <script src="../static/js/contact_me.js"></script>
+    <script src="{{url_for('static', filename='js/jqBootstrapValidation.js')}}"></script>
+    <script src="{{url_for('static', filename='js/contact_me.js')}}"></script>
 
     <!-- Theme JavaScript -->
-    <script src="../static/js/freelancer.min.js"></script>
+    <script src="{{url_for('static', filename='js/freelancer.min.js')}}"></script>
 
 </body>
 
 </html>
+
+
+
