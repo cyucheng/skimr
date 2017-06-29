@@ -63,7 +63,7 @@ en_words    = set(nltk.corpus.words.words())
 stopw_en    = stopwords.words('english')
 all_stopw   = set(stopw_en) | set(stop_en)
 
-pipe            = pd.read_pickle('pkl/model_logreg.pkl')
+pipe            = pd.read_pickle('pkl/model_logreg_std.pkl')
 ldamodel        = pickle.load(open('pkl/lda_model.pkl','rb'))
 commonwords_2   = pickle.load(open('pkl/commonwords.pkl','rb'))
 dictionary      = pickle.load(open('pkl/lda_dictionary.pkl','rb'))
