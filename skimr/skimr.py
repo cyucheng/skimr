@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-###################################################################################################
+###############################################################################
 # SKIMR for the web:
 #
 # -Use selenium webdriver to scrape html from input url
@@ -13,101 +13,82 @@
 # Clarence Cheng, 2017
 
 
-
 # WEB
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request
 from skimr import app
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 
 # TOOLS
-import re, os, time, sys
+import re
+import sys
 import pandas as pd
 import numpy as np
-import scipy
 from scipy import spatial
 import pickle
-import math
 import string
-from string import whitespace, punctuation
 
-# NLP
-sys.path.insert(0, 'readability')   # readability from https://github.com/mmautner/readability
-from readability import Readability
-import nltk
-# nltk.download('punkt')
-# nltk.download('words')
-# nltk.download('stopwords')
-import nltk.data
-sent_tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-from nltk.tokenize import RegexpTokenizer
-word_tokenizer = RegexpTokenizer('\s+', gaps=True)
-from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
-p_stemmer = PorterStemmer()
-
-# ML
+# ML/NLP
 from patsy import dmatrices
-import sklearn
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.pipeline import make_pipeline
-from sklearn.linear_model import LogisticRegression
-from sklearn import metrics
-from sklearn.metrics.pairwise import cosine_similarity
+sys.path.insert(0, 'readability')       # from mmautner/readability on GitHub
+from readability import Readability                 # noqa
+import nltk                                         # noqa
+import nltk.data                                    # noqa
+sent_tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+from nltk.tokenize import RegexpTokenizer           # noqa
+word_tokenizer = RegexpTokenizer('\s+', gaps=True)
+from nltk.corpus import stopwords                   # noqa
+from nltk.stem.porter import PorterStemmer          # noqa
+p_stemmer = PorterStemmer()
+from stop_words import get_stop_words               # noqa
+stop_en = get_stop_words('en')
+en_words = set(nltk.corpus.words.words())
+stopw_en = stopwords.words('english')
+all_stopw = set(stopw_en) | set(stop_en)
 
-from stop_words import get_stop_words
-stop_en     = get_stop_words('en')
-en_words    = set(nltk.corpus.words.words())
-stopw_en    = stopwords.words('english')
-all_stopw   = set(stopw_en) | set(stop_en)
+pipe = pd.read_pickle('pkl/model_logreg_std.pkl')
+ldamodel = pickle.load(open('pkl/lda_model.pkl', 'rb'))
+commonwords_2 = pickle.load(open('pkl/commonwords.pkl', 'rb'))
+dictionary = pickle.load(open('pkl/lda_dictionary.pkl', 'rb'))
 
-pipe            = pd.read_pickle('pkl/model_logreg_std.pkl')
-ldamodel        = pickle.load(open('pkl/lda_model.pkl','rb'))
-commonwords_2   = pickle.load(open('pkl/commonwords.pkl','rb'))
-dictionary      = pickle.load(open('pkl/lda_dictionary.pkl','rb'))
 
-#############################################################################################################################
 def webscrape(inputurl):
     # scrape html from url
     drvr = webdriver.PhantomJS()
     drvr.get(inputurl)
-    html1 = drvr.page_source
-    html2 = drvr.execute_script('return document.documentElement.innerHTML;')
-    return html2
-#############################################################################################################################
+    html = drvr.execute_script('return document.documentElement.innerHTML;')
+    return html
+###############################################################################
 
-#############################################################################################################################
+
 def cleanfulltext(scrapedhtml):
 
     lines = []
-    soup  = BeautifulSoup(scrapedhtml,'lxml')                     
-    txt0  = soup.find('div',attrs={'data-source':'post_page'})    
-    txt1  = txt0.find_all(class_='graf')
+    soup = BeautifulSoup(scrapedhtml, 'lxml')
+    txt0 = soup.find('div', attrs={'data-source': 'post_page'})
+    txt1 = txt0.find_all(class_='graf')
 
     for line in txt1:
-        txt2 = re.sub('<[^>]+>', '', str(line) )
+        txt2 = re.sub('<[^>]+>', '', str(line))
         lines.append(txt2)
 
     fulltext = ' '.join(lines)
 
     return fulltext
-#############################################################################################################################
+###############################################################################
 
-#############################################################################################################################
+
 def calc_params(fulltext):
-# Calculate values for logistic regression features
+    # Calculate values for logistic regression features
 
-# tokenize full text into sentences
-# for each sentence, calculate:
-#   sentence length
-#   readability metrics
-#   LDA vector of sentence -> cos similarity to LDA vector of article
-#   article position
-# put in array:
-#   id     sentence length     grade level     LDA similarity
-
+    # tokenize full text into sentences
+    # for each sentence, calculate:
+    #   sentence length
+    #   readability metrics
+    #   LDA vector of sentence -> cos similarity to LDA vector of article
+    #   article position
+    # put in array:
+    #   id     sentence length     grade level     LDA similarity
 
     all_sents = []
     all_ARI = []
@@ -141,14 +122,13 @@ def calc_params(fulltext):
         sent_lda = ldamodel[f_corpus]
         vec_lda = lda_to_vec(sent_lda)
         f_lda = 1-spatial.distance.cosine(vec_lda, vec_lda_art)
-        np_vec_lda = np.asarray(vec_lda)
         all_ldadists.append(f_lda)
 
         # get fraction position
-        f_wpos, f_spos = sent_pos(f, fulltext)#f[:-2], fulltext)
-        all_wposes.append( float(f_wpos) )
-        all_sposes.append( float(f_spos) )
-        
+        f_wpos, f_spos = sent_pos(f, fulltext)  # f[:-2], fulltext)
+        all_wposes.append(float(f_wpos))
+        all_sposes.append(float(f_spos))
+
         # get length
         ftwords = word_tokenizer.tokenize(f)
         ftlen = len(ftwords)
@@ -156,47 +136,46 @@ def calc_params(fulltext):
 
         # get readability
         f_rd = Readability(f)
-        all_ARI.append( float(f_rd.ARI()) )
-        all_FRE.append( float(f_rd.FleschReadingEase()) )
-        all_FKG.append( float(f_rd.FleschKincaidGradeLevel()) )
-        all_GFI.append( float(f_rd.GunningFogIndex()) )
-        all_SMG.append( float(f_rd.SMOGIndex()) )
-        all_CLI.append( float(f_rd.ColemanLiauIndex()) )
-        all_LIX.append( float(f_rd.LIX()) )
-        all_RIX.append( float(f_rd.RIX()) )
+        all_ARI.append(float(f_rd.ARI()))
+        all_FRE.append(float(f_rd.FleschReadingEase()))
+        all_FKG.append(float(f_rd.FleschKincaidGradeLevel()))
+        all_GFI.append(float(f_rd.GunningFogIndex()))
+        all_SMG.append(float(f_rd.SMOGIndex()))
+        all_CLI.append(float(f_rd.ColemanLiauIndex()))
+        all_LIX.append(float(f_rd.LIX()))
+        all_RIX.append(float(f_rd.RIX()))
 
         # sentence
         all_sents.append(f)
 
-
     # build pandas dataframe
-    data = pd.DataFrame({ \
-                          'dummy':all_lens, \
-                          'sentences':all_sents, \
-                          'length':all_lens, \
-                          'LDAdist':all_ldadists, \
-                          'wordPos':all_wposes, \
-                          'sentPos':all_sposes, \
-                          'ARI':all_ARI, \
-                          'FRE':all_FRE, \
-                          'FKG':all_FKG, \
-                          'GFI':all_GFI, \
-                          'SMG':all_SMG, \
-                          'CLI':all_CLI, \
-                          'LIX':all_LIX, \
-                          'RIX':all_RIX, \
+    data = pd.DataFrame({
+                          'dummy': all_lens,
+                          'sentences': all_sents,
+                          'length': all_lens,
+                          'LDAdist': all_ldadists,
+                          'wordPos': all_wposes,
+                          'sentPos': all_sposes,
+                          'ARI': all_ARI,
+                          'FRE': all_FRE,
+                          'FKG': all_FKG,
+                          'GFI': all_GFI,
+                          'SMG': all_SMG,
+                          'CLI': all_CLI,
+                          'LIX': all_LIX,
+                          'RIX': all_RIX,
                         })
-    
-    return data    #pandas dataframe with all sentences and their feature values
-#############################################################################################################################
 
-#############################################################################################################################
+    return data  # pandas dataframe with all sentences and their feature values
+###############################################################################
+
+
 def prep_text(sent):   # for cleaning individual sentences
     # remove punctuation
     translator = str.maketrans('', '', string.punctuation)
-    txt2 = re.sub(u'\u2014','',sent) # remove em dashes
-    txt3 = re.sub(r'\d+', '', txt2) # remove digits
-    txt4 = txt3.translate(translator) # remove punctuation
+    txt2 = re.sub(u'\u2014', '', sent)  # remove em dashes
+    txt3 = re.sub(r'\d+', '', txt2)     # remove digits
+    txt4 = txt3.translate(translator)   # remove punctuation
     # split text into words
     tokens = word_tokenizer.tokenize(txt4.lower())
     # strip single and double quotes from ends of words
@@ -218,9 +197,9 @@ def prep_text(sent):   # for cleaning individual sentences
     # remove common words post-stemming
     stemmed_nocommon = [i for i in stemmed2_strip if not i in commonwords_2]
     return stemmed_nocommon
-#############################################################################################################################
+###############################################################################
 
-#############################################################################################################################
+
 def lda_to_vec(lda_input):
     num_topics = 10
     vec = [0]*num_topics
@@ -229,18 +208,17 @@ def lda_to_vec(lda_input):
         val = i[1]
         vec[col] = val
     return vec
-#############################################################################################################################
+###############################################################################
 
-#############################################################################################################################
+###############################################################################
 # Function to calculate position of sentence within article
 # (frac of sentences into text)
+
 
 def sent_pos(sentence, text):
 
     # sentence is tokenized from highlight or full text
-    
-    # remove 1-word sentences?
-    
+
     # break text into sentences and get total sents in full text
     full_sents = sent_tokenizer.tokenize(text)
     num_sents = len(full_sents)
@@ -267,29 +245,29 @@ def sent_pos(sentence, text):
     elif pos < 0:
         frc_w = -1
         frc_s = -1
-                
+
     return frc_w, frc_s
 
-#############################################################################################################################
+###############################################################################
 
-#############################################################################################################################
+
 def predict(data):
-    y, X = dmatrices('dummy ~ length + LDAdist + wordPos + sentPos + ARI + FRE + FKG + GFI + SMG + CLI + LIX + RIX', \
-                 data, return_type="dataframe")
+    y, X = dmatrices('dummy ~ length + LDAdist + wordPos + sentPos + ARI + FRE \
+                     + FKG + GFI + SMG + CLI + LIX + RIX',
+                     data, return_type="dataframe")
 
     y = np.ravel(y)
     # predict value for data
     predicted = pipe.predict(X)
     # get confidence score
     decfxn = pipe.decision_function(X)
-    test = np.nonzero(predicted)
     return predicted, decfxn
-#############################################################################################################################
+###############################################################################
 
-#############################################################################################################################
+
 def markup(predicted, decfxn, data, scrapedhtml):
 
-    soup = BeautifulSoup(scrapedhtml,'lxml')
+    soup = BeautifulSoup(scrapedhtml, 'lxml')
 
     predict = list(predicted)
     tmpsoup = str(soup)
@@ -301,23 +279,21 @@ def markup(predicted, decfxn, data, scrapedhtml):
                 # print(str(f)+' is highlighted')
                 newf = '<span style="background-color: #ffff00">'+f+'</span>'
                 # print('newf is: ' + newf)
-                tmpsoup = tmpsoup.replace( f, newf)
+                tmpsoup = tmpsoup.replace(f, newf)
 
-        n+=1
+        n += 1
 
     outsoup = BeautifulSoup(tmpsoup, 'lxml')
     htmlmarkup = outsoup.prettify()
     return htmlmarkup
-#############################################################################################################################
-
-
+###############################################################################
 
 
 @app.route('/')
-
 @app.route('/index')
 def index():
     return render_template("index.html")
+
 
 @app.route('/output')
 def output():
@@ -330,8 +306,3 @@ def output():
     predicted, decfxn = predict(data)
     htmlmarkup = markup(predicted, decfxn, data, scrapedhtml)
     return render_template("output.html", html=htmlmarkup)
-
-
-
-
-
