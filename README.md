@@ -37,7 +37,7 @@ in the training and test set were highlighted with sensitivities of 63% and 61%,
 
 The skimr web app uses a frontend written in [Flask](http://flask.pocoo.org/) to accept a URL
 input from the user, then scrapes the html, parses the sentences, calculates features, applies the 
-model to predict whether it should be highlighted or not, marks up the appropriate sentences in
+model to predict whether each sentence should be highlighted or not, marks up the appropriate sentences in
 the html, and finally displays the highlights *in situ* on the article webpage.
 
 For a slide deck describing the development of skimr, see this
